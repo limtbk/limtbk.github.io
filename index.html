@@ -1,0 +1,60 @@
+<html>
+<head>
+<meta charset=utf-8 />
+<title>FPS test</title>
+</head>
+<body onload="start();">
+<script>
+var n = 0;
+
+function start() {
+  setTimeout(draw, 1000.0/30.0);
+}
+
+function draw() {
+  var canvas = document.getElementById('canvas');
+  var canvasW = canvas.width;
+  var canvasH = canvas.height;
+
+  if (canvas.getContext) {
+    var context = canvas.getContext('2d');
+    drawMatr(context, n % 30);
+    n++;
+  }
+  setTimeout(draw, 1000.0/30.0);
+}
+
+function drawMatr(context, num) {
+  const ic = 6;
+  const jc = 5;
+  var cw = canvas.width;
+  var ch = canvas.height;
+  var rw = cw / ic;
+  var rh = ch / jc;
+
+  for (var i = 0; i < ic; i++) {
+    for (var j = 0; j < jc; j++) {
+      var nn = j * ic + i;
+      if (num == nn) {
+        context.clearRect(i*rw, j*rh, rw, rh);
+      } else {
+        context.fillRect(i*rw, j*rh, rw, rh);
+      }
+    }
+  }
+
+}
+</script>
+
+<canvas id="canvas"></canvas>
+<style>
+	#canvas {
+	    position:fixed;
+	    left:0;
+	    top:0;
+	    width:100%;
+	    height:100%;
+	}
+</style>
+</body>
+</html>
